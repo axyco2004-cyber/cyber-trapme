@@ -1,0 +1,28 @@
+import React from "react";
+import { AppBar, Toolbar, Typography, Button, Container, Box } from "@mui/material";
+
+export default function Layout({ children }) {
+  return (
+    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      {/* Header */}
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            My React App
+          </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+
+      {/* Main Content */}
+      <Container sx={{ flex: 1, mt: 4 }}>
+        {children}
+      </Container>
+
+      {/* Footer */}
+      <Box component="footer" sx={{ p: 2, bgcolor: "#f1f1f1", textAlign: "center" }}>
+        <Typography variant="caption">© 2025 My React App</Typography>
+      </Box>
+    </Box>
+  );
+}
