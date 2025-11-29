@@ -1,98 +1,51 @@
-import React, { useState, useEffect } from "react";
-import './App.css';
-
-const locations = [
-    {
-        id: 1,
-        name: "Stockholm",
-        sights: ["Gamla Stan", "Vasa Museum", "Skansen"]
-    },
-    {
-        id: 2,
-        name: "Göteborg",
-        sights: ["Liseberg", "Universeum", "Göteborgs Konstmuseum"]
-    },
-    {
-        id: 3,
-        name: "Malmö",
-        sights: ["Turning Torso", "Malmöhus Slott", "Ribersborgs Strand"]
-    }
-];
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [position, setPosition] = useState(null);
-    const [geoError, setGeoError] = useState(null);
+  // Track which button is selected
+  const [selectedButton, setSelectedButton] = useState(null);
 
-    useEffect(() => {
-        if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    setPosition({
-                        lat: pos.coords.latitude,
-                        lng: pos.coords.longitude
-                    });
-                    setGeoError(null);
-                },
-                (err) => {
-                    setGeoError(err.message);
-                }
-            );
-        } else {
-            setGeoError("Geolocation is not supported by your browser.");
-        }
-    }, []);
+  return (
+    <div className="app-container">
+      {/* Top Main Menu */}
+      <header className="top-menu">
+        <h1>My React App</h1>
+        <nav>
+          <ul className="top-nav">
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+        </nav>
+      </header>
 
-    const goNext = () => {
-        setCurrentIndex((idx) => (idx + 1) % locations.length);
-    };
+      {/* Layout with Side Menu + Content */}
+      <div className="layout">
+        {/* Side Menu */}
+        <aside className="side-menu">
+          {[...Array(10)].map((_, i) => (
+            <button
+              key={i}
+              className="side-button"
+              onClick={() => setSelectedButton(i + 1)}
+            >
+              Button {i + 1}
+            </button>
+          ))}
+        </aside>
 
-    const goPrev = () => {
-        setCurrentIndex((idx) => (idx - 1 + locations.length) % locations.length);
-    };
-
-    const currentLocation = locations[currentIndex];
-
-    return (
-        <div style={{ fontFamily: "Arial, sans-serif", padding: "20px" }}>
-            <h1>Resa genom Sverige ✈️</h1>
-            <h2>Nuvarande plats: {currentLocation.name}</h2>
-
-            <h3>Sevärdheter:</h3>
-            <ul>
-                {currentLocation.sights.map((sight) => (
-                    <li key={sight}>{sight}</li>
-                ))}
-            </ul>
-
-            <div style={{ marginTop: "20px" }}>
-                <button onClick={goPrev} aria-label="Föregående plats">
-                    ← Föregående
-                </button>
-                <button
-                    onClick={goNext}
-                    style={{ marginLeft: "10px" }}
-                    aria-label="Nästa plats"
-                >
-                    Nästa →
-                </button>
-            </div>
-
-            <div style={{ marginTop: "30px" }}>
-                <h3>Din GPS-position:</h3>
-                {position && (
-                    <div>
-                        Latitud: {position.lat.toFixed(5)}, Longitud: {position.lng.toFixed(5)}
-                    </div>
-                )}
-                {geoError && (
-                    <div style={{ color: "red" }}>                    <div style={{ color: "red" }}>
-                        {geoError}   {geoError}
-                    </div>
-                )}
-            </div>
-        </div>
-    );
+        {/* Main Content Area */}
+        <main className="content">
+          <h2>Welcome!</h2>
+          {selectedButton ? (
+            <p>You clicked Button {selectedButton}</p>
+          ) : (
+            <p>Select a button from the side menu.</p>
+          )}
+        </main>
+      </div>
+    </div>
+  );
 }
 
 export default App;
