@@ -1,0 +1,124 @@
+/* App.css - Padel Theme */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f4f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-container {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #eaf6ff; /* ljusblå bakgrund */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #0066cc; /* stark blå */
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+h2 {
+  color: #0066cc;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.checkin-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #00b894; /* grön kant */
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #0066cc;
+}
+
+button {
+  padding: 10px 16px;
+  background-color: #00b894; /* padelgrön */
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover {
+  background-color: #00a077;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.log-list {
+  list-style: none;
+  padding: 0;
+}
+
+.log-list li {
+  background: white;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border-left: 4px solid #00b894;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s;
+}
+
+.log-list li:hover {
+  transform: translateX(5px);
+}
+
+.padel-icon {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.log-list strong {
+  color: #0066cc;
+  margin-right: 8px;
+}
+
+.log-list li span:not(.padel-icon) {
+  color: #666;
+}
+
+/* Empty state */
+.log-list:empty::before {
+  content: "No players checked in yet...";
+  display: block;
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-style: italic;
+}

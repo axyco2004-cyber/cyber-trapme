@@ -1,73 +1,38 @@
-:root {
-  --bg: #0f172a;
-  --panel: #111827;
-  --text: #e5e7eb;
-  --accent: #3b82f6;
-  --accent-2: #6366f1;
+.app-container {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
 }
 
-* { box-sizing: border-box; }
-body, html, #root { height: 100%; margin: 0; background: var(--bg); color: var(--text); }
-
-.app-container { display: flex; flex-direction: column; height: 100%; }
-
-.top-menu {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 20px; background: #0b1220; border-bottom: 1px solid #1f2937;
+.checkin-form {
+  margin-bottom: 20px;
 }
-.top-menu h1 { margin: 0; font-size: 18px; }
-.top-nav { list-style: none; display: flex; gap: 16px; margin: 0; padding: 0; }
-.top-nav li { cursor: pointer; padding: 6px 10px; border-radius: 6px; }
-.top-nav li:hover { background: #1f2937; }
-.top-nav li.active { background: var(--accent); color: white; }
 
-.layout { display: flex; flex: 1; min-height: 0; }
-
-.side-menu {
-  width: 220px; background: #0b1220; border-right: 1px solid #1f2937;
-  padding: 12px; display: flex; flex-direction: column; gap: 10px;
+input {
+  padding: 8px;
+  margin-right: 10px;
 }
-.side-button {
-  background: #1f2937; color: var(--text); border: none; padding: 10px 12px;
-  border-radius: 8px; cursor: pointer; text-align: left;
+
+button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  cursor: pointer;
 }
-.side-button:hover { background: #243041; }
-.side-button.selected { background: var(--accent-2); color: white; }
 
-.content { flex: 1; display: grid; grid-template-columns: 1fr 1.2fr; gap: 16px; padding: 16px; }
-.info-panel, .canvas-panel {
-  background: var(--panel); border: 1px solid #1f2937; border-radius: 12px; padding: 16px; min-height: 200px;
+button:hover {
+  background-color: #218838;
 }
-.geo-block { margin-top: 12px; }
-.error { color: #fca5a5; }
-.hint { display: block; margin-top: 6px; color: #9ca3af; }
 
-.canvas-panel canvas { border-radius: 8px; width: 100%; height: 100%; }
-import React from "react";
-import { AppBar, Toolbar, Typography, Button, Container, Box } from "@mui/material";
+.log-list {
+  list-style-type: none;
+  padding: 0;
+}
 
-export default function Layout({ children }) {
-  return (
-    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* Header */}
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            My React App
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-
-      {/* Main Content */}
-      <Container sx={{ flex: 1, mt: 4 }}>
-        {children}
-      </Container>
-
-      {/* Footer */}
-      <Box component="footer" sx={{ p: 2, bgcolor: "#f1f1f1", textAlign: "center" }}>
-        <Typography variant="caption">© 2025 My React App</Typography>
-      </Box>
-    </Box>
-  );
+.log-list li {
+  margin: 8px 0;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 5px;
 }

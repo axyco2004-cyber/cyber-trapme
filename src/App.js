@@ -1,49 +1,51 @@
-import React, { useState } from "react";
-import "./App.css";
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  // Track which button is selected
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [playerName, setPlayerName] = useState('');
+  const [log, setLog] = useState([]);
+
+  const handleCheckIn = () => {
+    if (playerName.trim() === '') return;
+    const newEntry = {
+      name: playerName,
+      time: new Date().toLocaleTimeString(),
+    };
+    setLog([newEntry, ...log]);
+    setPlayerName('');
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleCheckIn();
+    }
+  };
 
   return (
     <div className="app-container">
-      {/* Top Main Menu */}
-      <header className="top-menu">
-        <h1>My React App</h1>
-        <nav>
-          <ul className="top-nav">
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
-          </ul>
-        </nav>
-      </header>
-
-      {/* Layout with Side Menu + Content */}
-      <div className="layout">
-        {/* Side Menu */}
-        <aside className="side-menu">
-          {[...Array(10)].map((_, i) => (
-            <button
-              key={i}
-              className="side-button"
-              onClick={() => setSelectedButton(i + 1)}
-            >
-              Button {i + 1}
-            </button>
-          ))}
-        </aside>
-
-        {/* Main Content Area */}
-        <main className="content">
-          <h2>Welcome!</h2>
-          {selectedButton ? (
-            <p>You clicked Button {selectedButton}</p>
-          ) : (
-            <p>Select a button from the side menu.</p>
-          )}
-        </main>
+      <h1>🎾 Padel Player Check-In</h1>
+      
+      <div className="checkin-form">
+        <input
+          type="text"
+          placeholder="Enter player name"
+          value={playerName}
+          onChange={(e) => setPlayerName(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button onClick={handleCheckIn}>Check In</button>
       </div>
+
+      <h2>Check-In Log</h2>
+      <ul className="log-list">
+        {log.map((entry, index) => (
+          <li key={index}>
+            <span className="padel-icon">🏓</span>
+            <strong>{entry.name}</strong>
+            <span>checked in at {entry.time}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
